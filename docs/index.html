@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locust habitat suitability in Kazakhstan — MaxEnt model</title>
+<meta name="description" content="Interactive map of a MaxEnt model of locust and grasshopper habitat suitability in Kazakhstan: environmental layers, survey sites and model accuracy.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="panel" id="panel" aria-label="Map controls">
+    <button class="panel-toggle" id="panelToggle" aria-expanded="true" aria-controls="panelBody">
+      <span class="panel-toggle-bar" aria-hidden="true"></span>
+      <span class="sr-only">Collapse or expand the panel</span>
+    </button>
+    <div class="panel-body" id="panelBody">
+      <header class="intro">
+        <h1>Locust habitat suitability in Kazakhstan</h1>
+        <p class="lede" id="lede">A MaxEnt model built from field survey sites and 22 environmental layers.</p>
+      </header>
+
+      <section class="block" aria-labelledby="h-acc">
+        <h2 id="h-acc">Model accuracy</h2>
+        <div id="aucChart" class="auc-chart"></div>
+        <p class="note" id="accText"></p>
+      </section>
+
+      <section class="block" aria-labelledby="h-res">
+        <h2 id="h-res">Model output</h2>
+        <div class="layer-list" id="resultList" role="radiogroup" aria-labelledby="h-res"></div>
+      </section>
+
+      <section class="block" aria-labelledby="h-env">
+        <h2 id="h-env">Environmental factors</h2>
+        <p class="note">Ranked by their influence on the model. Select a factor to show its layer on the map.</p>
+        <div class="bar-key" aria-hidden="true">
+          <span><i class="key key-contrib"></i>percent contribution</span>
+          <span><i class="key key-perm"></i>permutation importance</span>
+        </div>
+        <div class="layer-list" id="envList" role="radiogroup" aria-labelledby="h-env"></div>
+        <button class="text-btn" id="envMore" type="button"></button>
+      </section>
+
+      <section class="block" aria-labelledby="h-map">
+        <h2 id="h-map">Map</h2>
+        <label class="check"><input type="checkbox" id="showPoints" checked> Survey sites <span class="muted" id="pointsCount"></span></label>
+        <div class="basemaps" role="radiogroup" aria-label="Basemap">
+          <label><input type="radio" name="base" value="light" checked> OpenStreetMap</label>
+          <label><input type="radio" name="base" value="sat"> Satellite</label>
+          <label><input type="radio" name="base" value="topo"> Terrain</label>
+        </div>
+      </section>
+
+      <footer class="credits">
+        <p>Data: field survey of Orthoptera in Kazakhstan. Predictors: WorldClim, MODIS, ERA5-Land, SRTM, Copernicus Land Cover and OpenLandMap via Google Earth Engine. Model: MaxEnt 3.4.4.</p>
+        <p><a href="https://github.com/AigulBekbayeva/locust_niche_modelling" id="repoLink">Methods and results on GitHub</a></p>
+		<p>Developed by A. Bekbayeva · <a href="https://www.linkedin.com/in/aigulbekbayeva/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </footer>
+    </div>
+  </aside>
+
+  <main class="map-wrap">
+    <div id="map" role="application" aria-label="Map of Kazakhstan"></div>
+    <div class="legend" id="legend" aria-live="polite"></div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

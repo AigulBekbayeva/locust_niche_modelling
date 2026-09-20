@@ -1,0 +1,6 @@
+gee_layers/
+maxent_input/
+*.asc
+*.tif
+maxent.jar
+__pycache__/
